@@ -5,18 +5,23 @@
  */
 package org.investsoft.telegra.ph.adapter.model;
 
+import java.util.List;
 import org.investsoft.telegra.ph.adapter.model.annotations.FieldDescription;
 
 /**
  *
  * @author SMS
  */
-public class CreateAccountRequest {
+public class CreatePageRequest {
 
-    @FieldDescription(length = 32)
-    public String short_name;
+    public String access_token;
+    @FieldDescription(length = 256)
+    public String title;
     @FieldDescription(length = 128)
     public String author_name;
     @FieldDescription(length = 512)
     public String author_url;
+    @FieldDescription(length = 64000, asJson = true)
+    public List<Node> content;
+    public Boolean return_content = false;
 }

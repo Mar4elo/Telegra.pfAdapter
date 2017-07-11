@@ -5,6 +5,7 @@
  */
 package org.investsoft.telegra.ph.adapter.client;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +18,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.investsoft.telegra.ph.adapter.model.annotations.FieldDescription;
 
 /**
  *
@@ -34,7 +36,7 @@ public class Client {
     }
 
     public enum Method {
-        createAccount;
+        createAccount, createPage;
     }
 
     private String POST(Method method, String req) {
@@ -66,14 +68,22 @@ public class Client {
         return sb.toString();
     }
 
-    private String makeRequest(Object req) {
+    public String makeRequest(Object req) {
         StringBuilder sb = new StringBuilder();
         for (Field f : req.getClass().getDeclaredFields()) {
             try {
                 Object val = f.get(req);
                 if (val != null) {
                     String name = f.getName();
-                    sb.append(name).append("=").append(val.toString());
+                    if(f.isAnnotationPresent(FieldDescription.class) && f.getAnnotation(FieldDescription.class).asJson()){
+                        val = this.getJSON(val);
+                    }
+                    if (f.isAnnotationPresent(FieldDescription.class)
+                            && val instanceof String
+                            && val.toString().length() > f.getAnnotation(FieldDescription.class).length()) {
+                        val = val.toString().substring(0, f.getAnnotation(FieldDescription.class).length());
+                    }
+                    sb.append(sb.length() > 0 ? "&" : "").append(name).append("=").append(val.toString());
                 }
             } catch (IllegalArgumentException | IllegalAccessException ex) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,9 +92,15 @@ public class Client {
         System.out.println(sb.toString());
         return sb.toString();
     }
-    private <T> T makeResponse(String response, Class<T> responseClass){
+
+    private <T> T makeResponse(String response, Class<T> responseClass) {
         System.out.println(response);
         return null;
+    }
+    
+    private String getJSON(Object obj){
+        Gson gson = new Gson();
+        return gson.toJson(obj);
     }
 
 }

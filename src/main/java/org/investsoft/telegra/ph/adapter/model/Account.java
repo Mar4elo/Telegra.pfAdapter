@@ -10,10 +10,11 @@ package org.investsoft.telegra.ph.adapter.model;
  * @author SMS
  */
 public class Account {
-    public String short_name ;
-    public String author_name ;
-    public String author_url ;
-    public String access_token ;
-    public String auth_url ;
-    public Integer page_count ;
+
+    public String short_name;
+    public String author_name;
+    public String author_url;
+    public String access_token;
+    public String auth_url;
+    public Integer page_count;
 }
