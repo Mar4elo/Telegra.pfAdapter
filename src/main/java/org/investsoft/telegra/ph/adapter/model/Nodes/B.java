@@ -12,10 +12,23 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  *
  * @author SMS
  */
-public class B extends Node {
+public final class B extends Node {
+
+    public B() {
+        super();
+    }
+
+    public B(String val) {
+        super();
+        this.setValue(val);
+    }
 
     public void setValue(String val) {
-        this.children = new ArrayList<>();
-        this.children.add(val);
+        if (val != null && !val.isEmpty()) {
+            if (this.children == null) {
+                this.children = new ArrayList<>();
+            }
+            this.children.add(val);
+        }
     }
 }

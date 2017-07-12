@@ -30,6 +30,7 @@ import org.investsoft.telegra.ph.adapter.model.Node;
 import org.investsoft.telegra.ph.adapter.model.Nodes.A;
 import org.investsoft.telegra.ph.adapter.model.Nodes.Img;
 import org.investsoft.telegra.ph.adapter.model.Nodes.P;
+import org.investsoft.telegra.ph.adapter.model.factories.NodeFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -66,8 +67,9 @@ public class Parser {
             Document doc = Jsoup.parse(new File(this.url), "UTF-8", "http://example.com/");
             doc.select("div[class='text __sun_article_text']").stream().collect(Collectors.toList()).get(0).children()
                     .stream().forEach(t -> {
-                        addNode(t);
-                        el(t.children());
+                         this.nodes.add(new NodeFactory().createNode(t));
+//                        addNode(t);
+//                        el(t.children());
                     });
 
             int a = 1;

@@ -13,18 +13,33 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  *
  * @author SMS
  */
-public class Li extends Node {
+public final class Li extends Node {
+
+    public Li() {
+        super();
+    }
+
+    public Li(String type, Long value) {
+        super();
+        this.setType(type);
+        this.setValue(value);
+    }
+
     public void setType(String type) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (type != null && !type.isEmpty()) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("type", type);
         }
-        this.attrs.put("type", type);
     }
 
     public void setValue(Long value) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (value != null) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("value", value);
         }
-        this.attrs.put("value", value);
     }
 }

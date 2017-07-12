@@ -12,13 +12,23 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  *
  * @author SMS
  */
-public class Video extends Node {
+public final class Video extends Node {
 
-    public void setSrc(String src) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
-        }
-        this.attrs.put("src", src);
+    public Video() {
+        super();
     }
 
+    public Video(String src) {
+        super();
+        this.setSrc(src);
+    }
+
+    public void setSrc(String src) {
+        if (src != null && !src.isEmpty()) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("src", src);
+        }
+    }
 }

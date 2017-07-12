@@ -13,24 +13,43 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  *
  * @author SMS
  */
-public class A extends Node {
+public final class A extends Node {
+
+    public A() {
+        super();
+    }
+
+    public A(String href, String alt, String val) {
+        super();
+        this.setHref(href);
+        this.setAlt(alt);
+        this.setValue(val);
+    }
 
     public void setHref(String href) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (href != null && !href.isEmpty()) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("href", href);
         }
-        this.attrs.put("href", href);
     }
 
     public void setAlt(String alt) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (alt != null && !alt.isEmpty()) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("alt", alt);
         }
-        this.attrs.put("alt", alt);
     }
 
     public void setValue(String val) {
-        this.children = new ArrayList<>();
-        this.children.add(val);
+        if (val != null && !val.isEmpty()) {
+            if (this.children == null) {
+                this.children = new ArrayList<>();
+            }
+            this.children.add(val);
+        }
     }
 }

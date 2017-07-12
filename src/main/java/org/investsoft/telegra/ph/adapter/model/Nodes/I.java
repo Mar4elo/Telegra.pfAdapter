@@ -14,8 +14,21 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  */
 public class I extends Node {
 
+    public I() {
+        super();
+    }
+
+    public I(String val) {
+        super();
+        this.setValue(val);
+    }
+
     public void setValue(String val) {
-        this.children = new ArrayList<>();
-        this.children.add(val);
+        if (val != null && !val.isEmpty()) {
+            if (this.children == null) {
+                this.children = new ArrayList<>();
+            }
+            this.children.add(val);
+        }
     }
 }

@@ -5,7 +5,6 @@
  */
 package org.investsoft.telegra.ph.adapter.model.Nodes;
 
-import java.util.ArrayList;
 import org.investsoft.telegra.ph.adapter.model.Node;
 
 /**
@@ -14,4 +13,7 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  */
 public class Figure extends Node {
 
+    public Figure() {
+        super();
+    }
 }

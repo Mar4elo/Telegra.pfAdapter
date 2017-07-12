@@ -13,17 +13,33 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  *
  * @author SMS
  */
-public class P extends Node {
+public final class P extends Node {
+
+    public P() {
+        super();
+    }
+
+    public P(String val, Align align) {
+        super();
+        this.setValue(val);
+        this.setAlign(align);
+    }
 
     public void setValue(String val) {
-        this.children = new ArrayList<>();
-        this.children.add(val);
+        if (val != null && !val.isEmpty()) {
+            if (this.children == null) {
+                this.children = new ArrayList<>();
+            }
+            this.children.add(val);
+        }
     }
 
     public void setAlign(Align align) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (align != null) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("align", align.name());
         }
-        this.attrs.put("align", align.name());
     }
 }

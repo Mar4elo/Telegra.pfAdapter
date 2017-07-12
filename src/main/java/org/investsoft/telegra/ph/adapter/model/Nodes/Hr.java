@@ -13,34 +13,53 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  *
  * @author SMS
  */
-public class Hr extends Node {
+public final class Hr extends Node {
+
+    public Hr() {
+        super();
+    }
+
+    public Hr(Align align, String color, Long size, Long width) {
+        super();
+        this.setAlign(align);
+        this.setColor(color);
+        this.setSize(size);
+        this.setWidth(width);
+    }
 
     public void setAlign(Align align) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (align != null) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("align", align.name());
         }
-        this.attrs.put("align", align.name());
     }
 
     public void setColor(String color) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (color != null && !color.isEmpty()) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("color", color);
         }
-        this.attrs.put("color", color);
     }
 
     public void setSize(Long size) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (size != null) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("size", size);
         }
-        this.attrs.put("size", size);
     }
 
     public void setWidth(Long width) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (width != null) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("width", width);
         }
-        this.attrs.put("width", width);
     }
-
 }

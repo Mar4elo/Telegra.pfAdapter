@@ -12,33 +12,53 @@ import org.investsoft.telegra.ph.adapter.model.Node;
  *
  * @author SMS
  */
-public class Img extends Node {
+public final class Img extends Node {
+
+    public Img() {
+        super();
+    }
+
+    public Img(String src, String alt, Align align, Long border) {
+        super();
+        this.setSrc(src);
+        this.setAlt(alt);
+        this.setAlign(align);
+        this.setBorder(border);
+    }
 
     public void setSrc(String src) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (src != null && !src.isEmpty()) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("src", src);
         }
-        this.attrs.put("src", src);
     }
 
     public void setAlt(String alt) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (alt != null && !alt.isEmpty()) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("alt", alt);
         }
-        this.attrs.put("alt", alt);
     }
 
     public void setAlign(Align align) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (align != null) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("align", align.name());
         }
-        this.attrs.put("align", align.name());
     }
 
     public void setBorder(Long border) {
-        if (this.attrs == null) {
-            this.attrs = new HashMap<>();
+        if (border != null) {
+            if (this.attrs == null) {
+                this.attrs = new HashMap<>();
+            }
+            this.attrs.put("border", border);
         }
-        this.attrs.put("border", border);
     }
 }

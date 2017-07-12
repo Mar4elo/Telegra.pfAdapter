@@ -6,16 +6,30 @@
 package org.investsoft.telegra.ph.adapter.model.Nodes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.investsoft.telegra.ph.adapter.model.Node;
 
 /**
  *
  * @author SMS
  */
-public class Strong extends Node {
+public final class Strong extends Node {
+
+    public Strong() {
+        super();
+    }
+
+    public Strong(String val) {
+        super();
+        this.setValue(val);
+    }
 
     public void setValue(String val) {
-        this.children = new ArrayList<>();
-        this.children.add(val);
+        if (val != null && !val.isEmpty()) {
+            if (this.children == null) {
+                this.children = new ArrayList<>();
+            }
+            this.children.add(val);
+        }
     }
 }

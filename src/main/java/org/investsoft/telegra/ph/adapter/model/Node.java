@@ -5,6 +5,7 @@
  */
 package org.investsoft.telegra.ph.adapter.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
  *
  * @author SMS
  */
-public class Node {
+public abstract class Node implements Serializable {
 
     public String tag;
     public Map<String, Object> attrs;
@@ -33,5 +34,21 @@ public class Node {
 
     public enum Align {
         center, left, right;
+
+        public static Align getAlign(String val) {
+            Align ret = null;
+            switch (val) {
+                case "center":
+                    ret = center;
+                    break;
+                case "left":
+                    ret = left;
+                    break;
+                case "right":
+                    ret = right;
+                    break;
+            }
+            return ret;
+        }
     }
 }
