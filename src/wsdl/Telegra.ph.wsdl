@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="Telegra.ph" 
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+             xmlns="http://schemas.xmlsoap.org/wsdl/" 
+             xmlns:tns="http://investsoft.org/Telegra.ph" 
+             xmlns:ns="http://investsoft.org/Telegra.ph/model" 
+             targetNamespace="http://investsoft.org/Telegra.ph">
+    <types>
+        <xsd:schema targetNamespace="http://investsoft.org/Telegra.ph/model"
+                    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+                    xmlns:annox="http://annox.dev.java.net"
+                    jaxb:extensionBindingPrefixes="annox"
+                    jaxb:version="2.1">
+            
+            <xsd:element name="CreateAccountRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="short_name" type="xsd:string">
+                            <xsd:annotation>
+                                <xsd:appinfo>
+                                    <annox:annotate target="field">@org.investsoft.telegra.ph.adapter.model.annotations.FieldDescription(length = 32)</annox:annotate>
+                                </xsd:appinfo>
+                            </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element name="author_name" type="xsd:string"/>
+                        <xsd:element name="author_url" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="CreateAccountResponse">
+                <xsd:complexType>
+                    <xsd:complexContent>
+                        <xsd:extension base="ns:Result">
+                            <xsd:sequence>
+                                <xsd:element name="result" type="ns:Account"/>
+                            </xsd:sequence>
+                        </xsd:extension>
+                    </xsd:complexContent>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:complexType name="Result">
+                <xsd:sequence>
+                    <xsd:element name="ok" type="xsd:boolean"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Account">
+                <xsd:sequence>
+                    <xsd:element name="short_name" type="xsd:string"/>
+                    <xsd:element name="author_name" type="xsd:string"/>
+                    <xsd:element name="author_url" type="xsd:string"/>
+                    <xsd:element name="access_token" type="xsd:string"/>
+                    <xsd:element name="auth_url" type="xsd:anyURI"/>
+                    <xsd:element name="page_count" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+    
+    <message name="CreateAccountRequest">
+        <part name="request" element="ns:CreateAccountRequest"/>
+    </message>
+    <message name="CreateAccountResponse">
+        <part name="response" element="ns:CreateAccountResponse"/>
+    </message>
+
+    <portType name="TelegraphPortType">
+        <operation name="createAccount">
+            <input message="tns:CreateAccountRequest"/>
+            <output message="tns:CreateAccountResponse"/>
+        </operation>
+    </portType>
+    <binding name="TelegraphPortBinding" type="tns:TelegraphPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="createAccount">
+            <soap:operation soapAction="http://investsoft.org/Telegra.ph/createAccount"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="TelegraphService">
+        <port name="TelegraphPort" binding="tns:TelegraphPortBinding">
+            <soap:address location="http://localhost/Telegraph"/>
+        </port>
+    </service>
+</definitions>
